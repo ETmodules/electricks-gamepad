@@ -3,7 +3,7 @@ let DELAY = 50
 let TIME: number = 0
 let PRESSED = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 
-basic.showNumber(GROUP+1)
+basic.showNumber(GROUP + 1)
 
 pins.digitalWritePin(DigitalPin.P0, 1)
 pins.digitalWritePin(DigitalPin.P1, 1)
@@ -83,7 +83,7 @@ basic.forever(function () {
         buttonState(i)
 })
 
-input.onGesture(Gesture.LogoDown, function() {
+input.onLogoEvent(TouchButtonEvent.Pressed, function () {
     GROUP += 1
     if (GROUP > EtGamepad.Group.Group9)
         GROUP = EtGamepad.Group.Group1
