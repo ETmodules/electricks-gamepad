@@ -4,6 +4,7 @@ let TIME: number = 0
 let PRESSED = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 
 basic.showNumber(GROUP + 1)
+radio.setGroup(GROUP + 1)
 
 pins.digitalWritePin(DigitalPin.P0, 1)
 pins.digitalWritePin(DigitalPin.P1, 1)
@@ -89,4 +90,5 @@ input.onLogoEvent(TouchButtonEvent.Pressed, function () {
         GROUP = EtGamepad.Group.Group1
     EtGamepad.setGroup(GROUP)
     basic.showNumber(GROUP + 1)
+    radio.setGroup(GROUP + 1)
 })
