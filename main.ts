@@ -75,7 +75,7 @@ function buttonState(button: EtGamepad.Gamepad) {
         return
     PRESSED[button] = newstate
     if (newstate)
-        button += EtGamepad.Gamepad.Button12
+        button += EtGamepad.BUTTONMAX
     radio.sendNumber(button)
 }
 

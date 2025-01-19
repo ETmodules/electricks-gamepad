@@ -5,7 +5,7 @@
         "core": "*",
         "radio": "*",
         "microphone": "*",
-        "pxt-gamepad": "github:etmodules/pxt-gamepad#5efecfde01c31094230075d92425fc134a2ab225"
+        "pxt-gamepad": "github:ETmodules/pxt-gamepad#13f260119b4a7ddc6d141759f2957fdb876cba8c"
     },
     "files": [
         "main.blocks",
