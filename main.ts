@@ -1,7 +1,31 @@
+
+input.onLogoEvent(TouchButtonEvent.Pressed, function () {
+    GROUP += 1
+    if (GROUP > EtGamepad.Group.Group9) {
+        GROUP = EtGamepad.Group.Group1
+    }
+    EtGamepad.setGroup(GROUP)
+    basic.showNumber(GROUP + 1)
+    radio.setGroup(GROUP + 1)
+})
+
+let TIME = 0
 let GROUP = EtGamepad.Group.Group1
 let DELAY = 50
-let TIME: number = 0
-let PRESSED = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+let PRESSED = [
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1
+]
 
 basic.showNumber(GROUP + 1)
 radio.setGroup(GROUP + 1)
@@ -17,7 +41,6 @@ pins.digitalWritePin(DigitalPin.P13, 1)
 pins.digitalWritePin(DigitalPin.P14, 1)
 pins.digitalWritePin(DigitalPin.P15, 1)
 pins.digitalWritePin(DigitalPin.P16, 1)
-
 pins.setPull(DigitalPin.P0, PinPullMode.PullUp)
 pins.setPull(DigitalPin.P1, PinPullMode.PullUp)
 pins.setPull(DigitalPin.P2, PinPullMode.PullUp)
@@ -74,21 +97,13 @@ function buttonState(button: EtGamepad.Gamepad) {
     if (PRESSED[button] == newstate)
         return
     PRESSED[button] = newstate
-    if (newstate)
+    if (newstate) // button released
         button += EtGamepad.BUTTONMAX
+    // button values 0..11 means 'got pressed'
+    // button values 12..23 means 'got released'
     radio.sendNumber(button)
 }
-
 basic.forever(function () {
     for (let i = EtGamepad.Gamepad.Button1; i <= EtGamepad.Gamepad.Button12; i++)
         buttonState(i)
-})
-
-input.onLogoEvent(TouchButtonEvent.Pressed, function () {
-    GROUP += 1
-    if (GROUP > EtGamepad.Group.Group9)
-        GROUP = EtGamepad.Group.Group1
-    EtGamepad.setGroup(GROUP)
-    basic.showNumber(GROUP + 1)
-    radio.setGroup(GROUP + 1)
 })
