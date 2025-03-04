@@ -12,7 +12,7 @@ input.onLogoEvent(TouchButtonEvent.Pressed, function () {
 let TIME = 0
 let GROUP = EtGamepad.Group.Group1
 let DELAY = 50
-let PRESSED = [
+let CURRENTSTATE = [
 1,
 1,
 1,
@@ -94,15 +94,20 @@ function buttonState(button: EtGamepad.Gamepad) {
             newstate = pins.digitalReadPin(DigitalPin.P11)
             break
     }
-    if (PRESSED[button] == newstate)
+    if (CURRENTSTATE[button] == newstate)
         return
-    PRESSED[button] = newstate
-    if (newstate) // button released
+    CURRENTSTATE[button] = newstate
+    if (newstate) { // button released
         button += EtGamepad.BUTTONMAX
+        music.play(music.tonePlayable(349, music.beat(BeatFraction.Eighth)), music.PlaybackMode.InBackground)
+    }
+    else
+        music.play(music.tonePlayable(523, music.beat(BeatFraction.Eighth)), music.PlaybackMode.InBackground)
     // button values 0..11 means 'got pressed'
     // button values 12..23 means 'got released'
     radio.sendNumber(button)
 }
+
 basic.forever(function () {
     for (let i = EtGamepad.Gamepad.Button1; i <= EtGamepad.Gamepad.Button12; i++)
         buttonState(i)
